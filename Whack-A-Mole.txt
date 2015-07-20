@@ -1,0 +1,5 @@
+Whack-A-Mole New
+
+Asthetic: Increase Panic and Anger
+
+We are creating a "survivor mode" twist on the whack-a-mole game where there is a timer at the top that is counting up and you are trying to stay alive for as long as you can. The score starts at 5 lives and every time you hit a mole then you sustain your lives, but each time you miss, you lose a life.
