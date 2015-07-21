@@ -1,5 +1,4 @@
 
-//file:///C:/Users/MES/Desktop/Programming/3_party/final/index.html
 
 game = Object.create(Game.prototype);
 game.keys = ['A', 'S', 'D', 'F'];
@@ -11,12 +10,18 @@ atom.currentMoleTime = 0;
 //This changes the speed, lower is faster
 atom.tillNewMole = 2;
 
-changeGameSpeed = function(speed)
+changeGameSpeed = function()
 {
-    for(i = 15; i < 0.25; i++)
-    {
-      atom.tilNewMole /= 1.5;
-    }
+    if(atom.currentMoleTime > 2)
+     atom.tillNewMole = 2;
+    if(atom.currentMoleTime > 4)
+     atom.tillNewMole = 1.5;
+    if(atom.currentMoleTime > 6)
+     atom.tillNewMole = 1;
+    if(atom.currentMoleTime > 8)
+     atom.tillNewMole = .5;
+    if(atom.currentMoleTime > 10)
+     atom.tillNewMole = .25;
 }
 
 game.update = function(dt) {
@@ -37,25 +42,31 @@ game.update = function(dt) {
     }
   };
   changeGameSpeed();
-  console.log(atom.currentMoleTime);
-
 };
 game.bop = {
   bopped: true,
-  total:0,
+  total:5,
   draw: function(){
+    if(this.total >= 0)
+    {
     atom.context.fillStyle = '#000';
     atom.context.font = '130px monospace';
-    atom.context.fillText('Score: ' + this.total, 300, 200);
-  },
-  with_key: function(key){
-    if (!!(game.activeMole + 1) === true && key === game.holes[game.activeMole].label){
-      this.total = this.total+1;
-      game.activeMole = -1;
-      this.bopped = true;
+    atom.context.fillText('Lives: ' + this.total, 300, 200);
+    console.log(this.total);
     }
-    else{
-      this.total = this.total-1;
+  },
+  with_key: function(key)
+  {
+    if(this.total >= 0)
+    {
+      if (!!(game.activeMole + 1) === true && key === game.holes[game.activeMole].label)
+      {
+        game.activeMole = -1;
+        this.bopped = true;
+      }
+      else{
+        this.total = this.total-1;
+      }
     }
   }
 }
